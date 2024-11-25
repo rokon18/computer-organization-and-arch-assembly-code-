@@ -16,7 +16,7 @@ char DB ?,'$';
             MOV AX, @DATA
             MOV DS, AX          ; initialize DS
         ;display message
-            LEA DX, MSG1         ;get message
+            LEA Dx, MSG1         ;get message
             MOV AH, 9           ;disply string function
             INT 21h             ;display message    
             
