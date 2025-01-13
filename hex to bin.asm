@@ -1,7 +1,7 @@
 .model small
 .stack 100h
 .data
-msg1 db 0dh,0ah, "Enter a hex number (1 to 4 digits): $"
+msg1 db  "Enter a hex number (1 to 4 digits): $"
 msg2 db 0dh,0ah, "The binary equivalent is: $"
 msg3 db 0dh,0ah, "Invalid hex number!$"
 .code
@@ -17,7 +17,7 @@ input:
 
     ; Initialize registers
     ;xor bx, bx  ; Clear BX (to store binary result)
-    mov cx, 2  ; Maximum of 4 hex digits
+    mov cx, 4  ; Maximum of 4 hex digits
 
 read_digit:
     mov ah, 01h
@@ -33,7 +33,7 @@ read_digit:
     cmp al, 'A'
     jb invalid
     cmp al, 'F'
-    jbe valid_letter
+    jbe valid_digit
     cmp al, 'a'
     jb invalid
     cmp al, 'f'
@@ -81,7 +81,7 @@ display:
     int 21h
     loop print_binary
 
-exit:
+    exit:
     mov ah, 4ch
     int 21h
 
@@ -89,7 +89,8 @@ invalid:
     mov ah, 09h
     lea dx, msg3
     int 21h
-    jmp exit
+    jmp exit 
+
 
 main endp
 end main
